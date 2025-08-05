@@ -1,12 +1,13 @@
-import { defineConfig } from 'drizzle-kit'
+import type { Config } from 'drizzle-kit'
 
-export default defineConfig({
+export default {
   schema: './lib/db/schema.ts',
-  out: './drizzle',
-  driver: 'better-sqlite',
+  out: './drizzle/migrations',
+  driver: 'mysql2',
   dbCredentials: {
-    url: './sqlite.db'
+    uri: process.env.DATABASE_URL!,
   },
+  tablesFilter: ['formai_*'],
   verbose: true,
   strict: true,
-})
+} satisfies Config
